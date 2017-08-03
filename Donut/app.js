@@ -48,8 +48,8 @@ function DonutComponent() {
         dc.hoverArc = d3.arc().innerRadius(innerRadius - dc.donutHoverDelta).outerRadius(outerRadius + dc.donutHoverDelta);
         dc.arcGroup.attr('transform', 'translate(' + dc.width / 2 + ',' + dc.height / 2 + ')');
 
-        renderMarker();
-        renderPie();
+        //renderMarker();
+        //renderPie();
     }
 
     function renderMarker() {
@@ -88,58 +88,7 @@ function DonutComponent() {
     }
 
     function renderPie() {
-        var wedges = d3.pie().value((d) => d.value)(dc.data);
 
-        var existingPaths = dc.arcGroup.selectAll('.arc').data(wedges);
-
-        existingPaths.select('path')
-            .attr('d', (datum) => {
-                if (datum.data.selected) {
-                    return dc.selectedArc(datum);
-                }
-                return dc.arc(datum);
-            })
-            .style('filter', (datum, i) => {
-                if (datum.data.selected) {
-                    return 'url(#dropshadow)';
-                }
-            })
-            .style('fill', (datum, i) => dc.color(datum.data.id));
-
-        var newPaths = existingPaths.enter().append('g')
-            .attr('class', 'arc');
-
-        newPaths.append('path')
-            .attr('d', (datum) => {
-                if (datum.data.selected) {
-                    return dc.selectedArc(datum);
-                }
-                return dc.arc(datum);
-            })
-            .style('filter', (datum, i) => {
-                if (datum.data.selected) {
-                    return 'url(#dropshadow)';
-                }
-            })
-            .style('fill', (datum, i) => dc.color(datum.data.id))
-            .on('click', (datum) => {
-                dc.data.forEach(j => j.selected = false);
-                datum.data.selected = true;
-                renderPie();
-            })
-            .on('mouseenter', function (datum) {
-                d3.select(this).attr('d', _datum => dc.hoverArc(_datum));
-            })
-            .on('mouseleave', function (datum) {
-                d3.select(this).attr('d', _datum => dc.arc(_datum));
-            });
-
-        dc.arcGroup.selectAll('.arc').filter((d) => d.data.selected).raise();
-
-        //rotate to selected wedge.
-        var selectedWedge = wedges.find(wedge => wedge.data.selected);
-        var rotationDelta = toDegree(((Math.PI / 2) - selectedWedge.startAngle) - ((selectedWedge.endAngle - selectedWedge.startAngle) / 2));
-        dc.arcGroup.transition().attr('transform', 'translate(' + dc.width / 2 + ',' + dc.height / 2 + ') rotate(' + rotationDelta + ',0,0)');
     };
 
     function toDegree(radian) {
