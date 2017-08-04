@@ -212,26 +212,32 @@
         //Set font style
         ctx.font = '48px Raleway';
         //Clean canvas
-        ctx.clearRect(0, 0, c.width, c.height);
+        //Step 1
+        //ctx.clearRect(0, 0, c.width, c.height);
         //Draw next frame with props
-        drawBackground();
+        //Step 2
+        //drawBackground();
         //If game hasn't started or player lost show splash screen text
         if (!GAME_PLAYING) {
-            ctx.strokeStyle = 'rgba(0,0,0,' + textAlpha.get() + ')';
-            ctx.strokeText('Click to start game', c.width / 2 - 230, 80);
-            ctx.fillStyle = 'rgba(255,255,255,' + textAlpha.get() + ')';
-            ctx.fillText('Click to start game', c.width / 2 - 230, 80);
-            textAlpha.fluctuate();
+            //Step 4
+            // ctx.strokeStyle = 'rgba(0,0,0,' + textAlpha.get() + ')';
+            // ctx.strokeText('Click to start game', c.width / 2 - 230, 80);
+            // ctx.fillStyle = 'rgba(255,255,255,' + textAlpha.get() + ')';
+            // ctx.fillText('Click to start game', c.width / 2 - 230, 80);
+            // textAlpha.fluctuate();
         }
         //If game is playing draw everything
         else {
-            drawEnemies();
-            drawPlayer();
-            //Draw the score
-            ctx.fillStyle = 'black';
-            ctx.strokeText(scoreCounter.getScore(), c.width / 2 - 11, 51);
-            ctx.fillStyle = 'white';
-            ctx.fillText(scoreCounter.getScore(), c.width / 2 - 10, 50);
+            //Step 5
+            // drawEnemies();
+            //Step 6
+            // drawPlayer();
+            //Step 8
+            // //Draw the score
+            // ctx.fillStyle = 'black';
+            // ctx.strokeText(scoreCounter.getScore(), c.width / 2 - 11, 51);
+            // ctx.fillStyle = 'white';
+            // ctx.fillText(scoreCounter.getScore(), c.width / 2 - 10, 50);
         }
     }
 
@@ -239,12 +245,13 @@
     var bg1 = new Background(0, 0);
     var bg2 = new Background(c.width, 0);
 
-    function drawBackground() {
-        ctx.drawImage(bg1.img, bg1.x, bg1.y);
-        ctx.drawImage(bg2.img, bg2.x, bg2.y);
-        bg1.move();
-        bg2.move();
-    }
+    //Step 3
+    // function drawBackground() {
+    //     ctx.drawImage(bg1.img, bg1.x, bg1.y);
+    //     ctx.drawImage(bg2.img, bg2.x, bg2.y);
+    //     bg1.move();
+    //     bg2.move();
+    // }
 
     //Instantiate and draw player
     function drawPlayer() {
@@ -299,16 +306,17 @@
 
     //Register event handlers & kick off the game
     window.onload = function() {
-        c.addEventListener('click', function() {
-            if (PLAYER_CONTROLS_ON) {
-                player.jump();
-            }
-            if (!GAME_PLAYING) {
-                resetGame();
-                GAME_PLAYING = true;
-                PLAYER_CONTROLS_ON = true;
-            }
-        });
+        //Step 7
+        // c.addEventListener('click', function() {
+        //     if (PLAYER_CONTROLS_ON) {
+        //         player.jump();
+        //     }
+        //     if (!GAME_PLAYING) {
+        //         resetGame();
+        //         GAME_PLAYING = true;
+        //         PLAYER_CONTROLS_ON = true;
+        //     }
+        // });
 
         update();
     };
